@@ -1,10 +1,10 @@
 #include "builtins.h"
 
 /**
- * __alias_add - add an alias to a list of aliases
- * @aliases: a pointer to a list of aliases
+ * __alias_add - Function adds an alias to a list of aliases
+ * @aliases: the pointer to a list of aliases
  * @name: the name of the alias
- * @value: the value of the alias
+ * @value: Value of the alias
  */
 void __alias_add(alias_t **aliases, const char *name, const char *value)
 {
@@ -23,7 +23,7 @@ void __alias_add(alias_t **aliases, const char *name, const char *value)
 
 
 /**
- * __alias_print - print an alias
+ * __alias_print - Function prints an alias
  * @alias: the alias to print
  */
 void __alias_print(alias_t *alias)
@@ -36,7 +36,7 @@ void __alias_print(alias_t *alias)
 
 
 /**
- * __alias - create and display aliases
+ * __alias - Function creates aliases and displays them
  * @info: shell info struct
  *
  * Return: status

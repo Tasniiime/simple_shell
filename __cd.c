@@ -1,13 +1,14 @@
 #include "builtins.h"
 
 /**
- * __cd_error - print an error upon failure to change directory
- * @info: shell info
- * @dir: directory
+ * __cd_error - Function prints an error
+ * if there is failure to change directory
+ * @info: shell informations
+ * @dir: a directory
  */
 void __cd_error(info_t *info, char *dir)
 {
-	char *error = strjoin(NULL, " ", "can't cd to", dir);
+	char *error = strjoin(NULL, " ", "can not cd to", dir);
 
 	perrorl_default(*info->argv, info->lineno, error, *info->tokens, NULL);
 
@@ -18,7 +19,7 @@ void __cd_error(info_t *info, char *dir)
 
 
 /**
- * __cd_success - update the environment upon success
+ * __cd_success - function updates the environment on success
  * @info: shell info
  */
 void __cd_success(info_t *info)
@@ -48,8 +49,8 @@ void __cd_success(info_t *info)
 
 
 /**
- * __cd - changes the directory
- * @info: arguments passed
+ * __cd - changing the directory
+ * @info: arguments passed in
  *
  * Return: int
  */

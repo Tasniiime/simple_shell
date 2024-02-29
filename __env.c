@@ -1,9 +1,9 @@
 #include "builtins.h"
 
 /**
-  * __env - displays environment
+  * __env - this displays the environment
   * @info: arguments passed
-  * Return: int
+  * Return: Returns an int value
   */
 int __env(info_t *info)
 {

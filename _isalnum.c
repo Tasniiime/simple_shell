@@ -1,9 +1,9 @@
 #include "ctype.h"
 
 /**
-  * _isalnum - checks if the character is alphanumeric
+  * _isalnum - function checks if the character is alphanumeric
   * @c: character to check
- * Return: If c is alphanumeric, return 1. Otherwise, return 0.
+ * Return: Returns 1 if c is alphanumeric, otherwise 0
   */
 bool _isalnum(int c)
 {

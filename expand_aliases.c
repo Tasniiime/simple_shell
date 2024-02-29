@@ -1,11 +1,12 @@
 #include "hsh.h"
 
 /**
- * expand_aliases - perform recursive alias expansion on the current command
+ * expand_aliases - function performs recursive
+ * alias expansions on the current command
  * @aliases: alias list
  * @tokptr: pointer to the current tokens
  *
- * Return: If expansion succeeds, return a pointer t to the otherwise 0
+ * Return: Returns 1 on success or a pointer t to the otherwise 0
  */
 void expand_aliases(alias_t *aliases, char ***tokptr)
 {

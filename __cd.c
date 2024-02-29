@@ -1,54 +1,95 @@
 #include "builtins.h"
-/**
-* _cd - Function implementation changes current working directory.
-* @path: Directory to change to, or NULL to change to HOME.
-* Return: Returns 0 on success, or -1 on error
-* we have an error message printed to stderr.
-*/
-int _cd(const char *path)
-{
-	const char *dir;
-	char cwd[1024];
-	static char prev_dir[1024] = "";
 
-	if (path == NULL || strcmp(path, "~") == 0)
+/**
+ * __cd_error - Function prints an error
+ * if there is failure to change directory
+ * @info: shell informations
+ * @dir: a directory
+ */
+void __cd_error(info_t *info, char *dir)
+{
+	char *error = strjoin(NULL, " ", "can not cd to", dir);
+
+	perrorl_default(*info->argv, info->lineno, error, *info->tokens, NULL);
+
+	info->status = 2;
+
+	free(error);
+}
+
+
+/**
+ * __cd_success - function updates the environment on success
+ * @info: shell info
+ */
+void __cd_success(info_t *info)
+{
+	char **tokens = info->tokens;
+	char *setenv_tokens[] = {"setenv", NULL, NULL, NULL};
+
+	info->tokens = setenv_tokens;
+
+	setenv_tokens[1] = "OLDPWD";
+	setenv_tokens[2] = info->cwd;
+
+	__setenv(info);
+
+	free(info->cwd);
+	info->cwd = getcwd(NULL, 0);
+
+	setenv_tokens[1] = "PWD";
+	setenv_tokens[2] = info->cwd;
+
+	__setenv(info);
+
+	info->tokens = tokens;
+
+	info->status = EXIT_SUCCESS;
+}
+
+
+/**
+ * __cd - changing the directory
+ * @info: arguments passed in
+ *
+ * Return: int
+ */
+int __cd(info_t *info)
+{
+	char *dir = NULL, **args = info->tokens + 1;
+
+	info->status = EXIT_SUCCESS;
+	if (*args)
 	{
-		dir = getenv("HOME");
-		if (!dir)
+		if (!_strcmp(*args, "-"))
 		{
-			fprintf(stderr, "HOME not set\n");
-			return (-1);
+			dir = get_dict_val(info->env, "OLDPWD");
+			if (!dir)
+				dir = info->cwd;
+
+			info->status = chdir(dir);
+			if (!info->status)
+			{
+				write(STDOUT_FILENO, dir, _strlen(dir));
+				write(STDOUT_FILENO, "\n", 1);
+			}
 		}
-	}
-	else if (strcmp(path, "-") == 0)
-	{
-		if (strlen(prev_dir) == 0)
+		else
 		{
-			fprintf(stderr, "Previous directory is not available\n");
-			return (-1);
+			dir = *args;
+			info->status = chdir(dir);
 		}
-		dir = prev_dir;
-		printf("%s\n", dir);
 	}
 	else
 	{
-		dir = path;
+		dir = get_dict_val(info->env, "HOME");
+		if (dir)
+			info->status = chdir(dir);
 	}
-	if (getcwd(prev_dir, sizeof(prev_dir)) == NULL)
-	{
-		fprintf(stderr, "Error in getting the current directory\n");
-		return (-1);
-	}
-	if (chdir(dir) != 0)
-	{
-		perror("cd");
-		return (-1);
-	}
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		fprintf(stderr, "Error in updating PWD\n");
-		return (-1);
-	}
-	_setenv("PWD", cwd);
-	return (0);
+	if (info->status != -1)
+		__cd_success(info);
+	else
+		__cd_error(info, dir);
+
+	return (info->status);
 }

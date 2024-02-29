@@ -3,39 +3,39 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-
 #include "alias.h"
+#include "tokens.h"
 #include "command.h"
 #include "env.h"
+#include "history.h"
 #include "error.h"
 #include "getline.h"
-#include "history.h"
 #include "list.h"
 #include "string.h"
-#include "tokens.h"
 #include "types.h"
+#include <fcntl.h>
 
 extern char **environ;
 
 /**
-  * struct info - shell state
-  * @interactive: arguments passed
-  * @argc: arguments passed
-  * @argv: arguments passed
-  * @file: arguments passed
-  * @fileno: arguments passed
-  * @status: arguments passed
-  * @line: arguments passed
-  * @lineno: arguments passed
-  * @tokens: arguments passed
-  * @pid: arguments passed
-  * @cwd: arguments passed
-  * @exe: arguments passed
-  * @env: arguments passed
-  * @path: arguments passed
-  * @aliases: arguments passed
-  * @history: arguments passed
-  * @commands: arguments passed
+  * struct info - This is the shell state
+  * @interactive: the functions argument(s)
+  * @argc: the functions argument(s)
+  * @argv: the functions argument(s)
+  * @file: the functions argument(s)
+  * @fileno: the functions argument(s)
+  * @status: the functions argument(s)
+  * @line: the functions argument(s)
+  * @lineno: the functions argument(s)
+  * @tokens: the functions argument(s)
+  * @pid: the functions argument(s)
+  * @cwd: the functions argument(s)
+  * @exe: the functions argument(s)
+  * @env: the functions argument(s)
+  * @path: the functions argument(s)
+  * @aliases: the functions argument(s)
+  * @history: the functions argument(s)
+  * @commands: the functions argument(s)
   */
 struct info
 {

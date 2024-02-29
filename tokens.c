@@ -1,7 +1,7 @@
 #include "tokens.h"
 
 /**
- * tokenize - split a string into words (tokens) and dequote
+ * tokenize - func splits a string into words (tokens) and dequote
  * @str: the string to tokenize
  * Return: If malloc fails or if str is 0 or contains no tokens, return NULL.
  * Otherwise, return an array containing the tokens in str, terminated by NULL.

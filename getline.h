@@ -9,10 +9,10 @@
 #define GETLINE_BUFFER_SIZE 4096
 
 /**
- * struct buf_s - input buffer
+ * struct buf_s - func inputs buffer
  * @buffer: the buffer
  * @next: pointer to the next value
- * @remaining: number of values remaining
+ * @remaining: returns number of values remaining
  */
 typedef struct buf_s
 {
@@ -24,10 +24,10 @@ typedef struct buf_s
 #define GETLINE_TABLE_SIZE 127
 
 /**
- * struct buf_table_node_s - input buffer hash table
+ * struct buf_table_node_s - func inputs buffer hash table
  * @fd: file descriptor
  * @buf: associated buffer
- * @next: next buffer in chain
+ * @next: Returns the next buffer in the chain
  */
 typedef struct buf_table_node_s
 {

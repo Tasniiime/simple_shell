@@ -1,10 +1,10 @@
 #include "tokens.h"
 
 /**
- * arrdup - duplicate a (NULL-terminated) array
- * @arr: the array to duplicate
+ * arrdup - function duplicates a (NULL-terminated) array
+ * @arr: the array to be duplicate
  *
- * Return: a duplicate of arr
+ * Return: returns a duplicate of the arr
  */
 char **arrdup(char **arr)
 {

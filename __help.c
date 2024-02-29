@@ -1,9 +1,9 @@
 #include "builtins.h"
 
 /**
- * __help - show help for builtins commands
- * @info: shell info
- * Return: status
+ * __help - function shows help for builtin commands
+ * @info: shell information
+ * Return: Returns status
  */
 int __help(struct info *info)
 {

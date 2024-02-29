@@ -1,9 +1,9 @@
 #include "builtins.h"
 
 /**
- * atou - convert a string to an integer
+ * atou - function converts a string to an integer
  * @s: character to check
- * Return: int
+ * Return: returns an int value
  */
 unsigned int atou(char *s)
 {

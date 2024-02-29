@@ -1,7 +1,7 @@
 #include "hsh.h"
 
 /**
- * expand_vars - perform variable expansion on the current set of tokens
+ * expand_vars - func performs variable expansions on the current set of tokens
  * @info: shell information
   * @tokptr: pointer to the current tokens
  */

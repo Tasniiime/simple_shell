@@ -6,7 +6,7 @@
 #include "types.h"
 
 /**
- * struct list - singly linked list
+ * struct list - Function makes a singly linked list
  * @str: dynamically-allocated string
  * @next: pointer to the next node
  */

@@ -1,7 +1,7 @@
 #include "hsh.h"
 
 /**
- * remove_comments - remove comments (#) from a command
+ * remove_comments - function removes comments (#) from a given command
  * @cmd: pointer to the cmd to process
  */
 void remove_comments(cmdlist_t *cmd)

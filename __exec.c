@@ -1,9 +1,9 @@
 #include "builtins.h"
 
 /**
- * __exec - replace the running shell with a new program
- * @info: arguments passed
- * Return: int
+ * __exec - Implementation replaces the running shell with a new program
+ * @info: arguments to be passed
+ * Return: Returns 1 on success or 0
  */
 int __exec(info_t *info)
 {

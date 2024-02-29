@@ -1,95 +1,77 @@
 #include "builtins.h"
 
+
 /**
- * __cd_error - Function prints an error
- * if there is failure to change directory
- * @info: shell informations
- * @dir: a directory
- */
+* __cd_error - Function prints an error
+* if there is failure to change directory
+* @info: shell informations
+* @dir: a directory
+*/
 void __cd_error(info_t *info, char *dir)
 {
-	char *error = strjoin(NULL, " ", "can not cd to", dir);
-
-	perrorl_default(*info->argv, info->lineno, error, *info->tokens, NULL);
-
+	fprintf(stderr, "%s: %d: can't cd to %s\n", info->argv[0], info->lineno, dir);
 	info->status = 2;
-
-	free(error);
 }
 
 
 /**
- * __cd_success - function updates the environment on success
- * @info: shell info
- */
+* __cd_success - function updates the environment on success
+* @info: shell info
+*/
 void __cd_success(info_t *info)
 {
-	char **tokens = info->tokens;
-	char *setenv_tokens[] = {"setenv", NULL, NULL, NULL};
+	char cwd[1024];
 
-	info->tokens = setenv_tokens;
-
-	setenv_tokens[1] = "OLDPWD";
-	setenv_tokens[2] = info->cwd;
-
-	__setenv(info);
-
-	free(info->cwd);
-	info->cwd = getcwd(NULL, 0);
-
-	setenv_tokens[1] = "PWD";
-	setenv_tokens[2] = info->cwd;
-
-	__setenv(info);
-
-	info->tokens = tokens;
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
+		_setenv("OLDPWD", info->cwd);
+		free(info->cwd);
+		info->cwd = strdup(cwd);
+		_setenv("PWD", info->cwd);
+	}
+	else
+	{
+		fprintf(stderr, "Error updating current working directory.\n");
+	}
 
 	info->status = EXIT_SUCCESS;
 }
 
-
 /**
- * __cd - changing the directory
- * @info: arguments passed in
- *
- * Return: int
- */
+* __cd - changing the directory
+* @info: arguments passed in
+*
+* Return: int
+*/
 int __cd(info_t *info)
 {
 	char *dir = NULL, **args = info->tokens + 1;
 
-	info->status = EXIT_SUCCESS;
 	if (*args)
 	{
 		if (!_strcmp(*args, "-"))
 		{
 			dir = get_dict_val(info->env, "OLDPWD");
-			if (!dir)
-				dir = info->cwd;
-
-			info->status = chdir(dir);
-			if (!info->status)
-			{
-				write(STDOUT_FILENO, dir, _strlen(dir));
-				write(STDOUT_FILENO, "\n", 1);
-			}
+			dir = (dir) ? dir : info->cwd;
 		}
 		else
 		{
 			dir = *args;
-			info->status = chdir(dir);
 		}
 	}
 	else
 	{
 		dir = get_dict_val(info->env, "HOME");
-		if (dir)
-			info->status = chdir(dir);
 	}
-	if (info->status != -1)
-		__cd_success(info);
+
+	if (dir && chdir(dir) == 0)
+	{
+		_cd_success(info);
+	}
 	else
-		__cd_error(info, dir);
+	{
+		_cd_error(info, dir ? dir : "HOME");
+	}
 
 	return (info->status);
 }

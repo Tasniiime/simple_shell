@@ -1,7 +1,7 @@
 #include "hsh.h"
 
 /**
-  * _sigint - reprompts
+  * _sigint - function re-prompts the user
   * @signal: signal passed
   */
 void _sigint(int signal __attribute__((unused)))

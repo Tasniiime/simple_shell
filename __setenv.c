@@ -1,10 +1,10 @@
 #include "builtins.h"
 
 /**
- * __setenv - sets the environment variables
+ * __setenv - function sets the environment variables
  * @info: arguments passed
  *
- * Return: status
+ * Return: returns the status
  */
 int __setenv(info_t *info)
 {

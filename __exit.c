@@ -1,9 +1,9 @@
 #include "builtins.h"
 
 /**
-  * __exit - exits from shell
-  * @info: arguments passed
-  * Return: int
+  * __exit - function helps to exit from the shell
+  * @info: argument(s)
+  * Return: Returns 1 on success or 0 on fail
   */
 int __exit(info_t *info)
 {

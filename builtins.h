@@ -88,6 +88,7 @@ const struct builtin *get_builtins(void);
 
 int __alias(info_t *info);
 int __cd(info_t *info);
+int _cd(const char *path);
 int __env(info_t *info);
 int __exec(info_t *info);
 int __exit(info_t *info);

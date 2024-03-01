@@ -1,7 +1,7 @@
 #include "builtins.h"
 
 /**
- * __help - show help for builtins commands
+ * __help - shows help for builtins commands
  * @info: shell info
  * Return: status
  */

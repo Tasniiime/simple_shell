@@ -1,9 +1,9 @@
 #include "builtins.h"
 
 /**
-  * __unsetenv - unsets the environment variable
+  * __unsetenv - function unsets the environment variable
   * @info: arguments passed
-  * Return: status
+  * Return: returns status
   */
 int __unsetenv(info_t *info)
 {

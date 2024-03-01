@@ -1,7 +1,7 @@
 #include "builtins.h"
 
 /**
-  * __env - displays environment
+  * __env - displays the environment
   * @info: arguments passed
   * Return: int
   */

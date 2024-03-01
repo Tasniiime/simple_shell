@@ -48,10 +48,10 @@ void __cd_success(info_t *info)
 
 
 /**
- * __cd - changes the directory
+ * __cd - function changes the directory
  * @info: arguments passed
  *
- * Return: int
+ * Return: returns an int
  */
 int __cd(info_t *info)
 {
